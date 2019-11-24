@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<script>
+		function getStudents(){
+			var list = document.getElementById("val");
+            while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            }
+			var rou = document.getElementById("route");
+			rID = rou.options[rou.selectedIndex].value;
+			$.ajax({
+        		url: "/bus/route/"+rID+"/feedback",
+        		method:"GET",
+        		async:false,
+        		success: function(resp){
+        			var li = resp["u"]
+        			var di = document.getElementById("val");
+        			for(var i=0;i<li.length;i++){
+        				var id = document.createElement("p");
+        				id.innerHTML = "commuterID : "+li[i]["commuterID"]+" ";
+        				var p = document.createElement("p");
+        				p.innerHTML = li[i]["description"];
+        				var p1 = document.createElement("p");
+        				p1.innerHTML = "votes : "+li[i]["nov"];
+        				var br = document.createElement("br");
+        				//di.appendChild(id);
+        				di.appendChild(p);
+        				di.appendChild(p1);
+        				di.appendChild(br);
+        			}
+
+				}
+			});
+		}
+
+		
+	</script>
+	<select id="route" onchange="getStudents()">
+	  <option value="01PESB2020">01PESB2020</option>
+	  <option value="02PESB2020">02PESB2020</option>
+	  <option value="03PESB2020">03PESB2020</option>
+	  <option value="04PESB2020">04PESB2020</option>
+	  <option value="05PESB2020">05PESB2020</option>
+	  <option value="06PESB2020">06PESB2020</option>
+	</select>
+
+	<!--<div style="display: none;" id="val"></div>-->
+	<div id="val"></div>
+
+	<!--<ul>
+    {% for i in data %}
+
+      <div id="d{{loop.index}}">
+	      <p>{{loop.index}}.</p>
+	      <p id="p{{loop.index}}">Route Id : {{ i["rID"] }}</p>
+	      {% set j = i["rID"] %}
+	      <p>Message : {{ i["message"] }}</p>
+	      <button id={{j}}_{{loop.index}}> Reply </button>
+  	</div>
+  </br>
+    {% endfor %}
+	</ul>
+-->
+
+
+</body>
+</html>

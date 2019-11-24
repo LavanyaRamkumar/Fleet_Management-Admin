@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5dc843d9caa5dd4b2a6e6753"},"userID":"PES2020STUD0001","routeID":"01PESB2020","isBoarded":1,"IsAbsent":0}
+{"_id":{"$oid":"5dc84437caa5dd4b2a6e6754"},"userID":"PES2020STUD0002","routeID":"02PESB2020","isBoarded":1,"IsAbsent":0}
+{"_id":{"$oid":"5dd3b55f42947c2293170f2b"},"routeID":"01PESB2020","isBoarded":{"$numberLong":"1"},"userID":"PES2020STUD0003","IsAbsent":0}

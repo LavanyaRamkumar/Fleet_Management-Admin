@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body onload="addClick()">
+	<script>
+		function addClick(){
+			console.log("he")
+			var v = document.getElementsByTagName("button");
+			console.log(v.length)
+			for (i=0;i<v.length;i++) {
+				var p = "p"+(i+1);
+				console.log(p)
+				var rID = document.getElementById(p).innerHTML.split(":")[1].trim();
+				console.log(rID)
+				v[i].onclick = function() {console.log(this.id);reply(this.id)};
+			}
+		}
+		function re(i){
+			console.log(i);
+		}
+		function reply(ele){
+			var e = ele.split("_")
+			rID = e[0]
+			ind = e[1]
+			console.log(rID);
+			var p = "d"+(ind);
+			console.log(p);
+			var inp = document.createElement("input");
+			var di = document.getElementById(p);
+			var but = document.createElement("button");
+			but.innerHTML = "send"
+			but.onclick = function() { var msg = inp.value; sendResponse(rID,msg)};
+			di.appendChild(inp);
+			di.appendChild(but);
+		}
+
+		function sendResponse(rID,msg){
+			console.log(msg)
+			jsn = {"message" : msg};
+			$.ajax({
+      			url: "/admin/bus/route/"+rID+"/emergency",
+     			method: 'POST',
+      			async: false,
+      			dataType : "json",
+      			contentType: "application/json; charset=utf-8",
+      			crossDomain : true,
+    			data : JSON.stringify(jsn),
+      			success: function(resp){
+        			window.location = "http://localhost:8000/admin/messages";
+            		return resp;
+        		}
+
+			});
+
+			/*$.ajax({
+    		type: 'POST',
+    // make sure you respect the same origin policy with this url:
+    // http://en.wikipedia.org/wiki/Same_origin_policy
+    		url: "http://127.0.0.1:5000/PES/course/"+cid+"/type/"+type_a+"?t_id="+t_id ,
+    		async:false,
+    		dataType : "json",
+    		contentType: "application/json; charset=utf-8",
+    		crossDomain : true,
+    		data : JSON.stringify(jsn),
+    		*/
+		}
+
+	</script>
+	<ul>
+    {% for i in data %}
+
+      <div id="d{{loop.index}}">
+	      <p>{{loop.index}}.</p>
+	      <p id="p{{loop.index}}">Route Id : {{ i["rID"] }}</p>
+	      {% set j = i["rID"] %}
+	      <p>Message : {{ i["message"] }}</p>
+	      <button id={{j}}_{{loop.index}} class=> Reply </button>
+  	</div>
+  </br>
+    {% endfor %}
+	</ul>
+
+</body>
+
+</html>

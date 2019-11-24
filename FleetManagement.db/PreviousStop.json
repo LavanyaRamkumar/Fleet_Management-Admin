@@ -1,0 +1,6 @@
+{"_id":{"$oid":"5dc85abccaa5dd4b2a6e6757"},"routeID":"01PESB2020","prevStopID":"01PESB2020STP01"}
+{"_id":{"$oid":"5dd286b642947c2293170f28"},"routeID":"02PESB2020","prevStopID":"02PESB2020STP01"}
+{"_id":{"$oid":"5dd42c401f2de54959c2744d"},"routeID":"03PESB2020","prevStopID":"03PESB2020STP02"}
+{"_id":{"$oid":"5dd42c4b1f2de54959c2744e"},"routeID":"04PESB2020","prevStopID":"04PESB2020STP02"}
+{"_id":{"$oid":"5dd42c591f2de54959c2744f"},"routeID":"05PESB2020","prevStopID":"05PESB2020STP02"}
+{"_id":{"$oid":"5dd42c611f2de54959c27450"},"routeID":"06PESB2020","prevStopID":"06PESB2020STP02"}
